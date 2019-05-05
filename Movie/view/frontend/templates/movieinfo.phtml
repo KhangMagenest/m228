@@ -1,0 +1,56 @@
+<h2>Movie Details</h2>
+<table style="border: 1px solid black;">
+    <tr style="background-color:#2af4cd;border:1px solid black;">
+        <th>Movie Name</th>
+        <th>Director</th>
+        <th>Actor</th>
+    </tr>
+
+    <?php
+        $movie = '';
+        $director = array();
+        $actor = array();
+        $i = 0;
+        $collection = $block->getMovieInfo();
+        $row = $collection->count();
+        foreach($collection as $value){
+            if(strcmp($movie, $value->getMovieName())!= 0 && $movie != ''){
+                echo "<tr style='border:1px solid black;'><td>".$movie."</td>";
+                echo "<td style='border:1px solid black;'><ul>";
+                foreach(array_unique($director) as $temp){
+                    echo"<li>".$temp."</li>";
+                }
+                echo"</ul></td><td style='border:1px solid black;'><ul>";
+                foreach(array_unique($actor) as $temp){
+                    echo"<li>".$temp."</li>";
+                }
+                echo'</ul></td></tr>';
+                $movie = $value->getMovieNamae();
+                $director = array();
+                $actor = array();
+                array_push($director, $value->getDirectorName());
+                array_push($actor, $value->getActorName());
+                $i = $i + 1;
+            }
+            else{
+                $movie = $value->getMovieName();
+                array_push($director, $value->getDirectorName());
+                array_push($actor, $value->getActorName());
+                $i = $i + 1;
+            }
+            if($i == $row){
+                echo "<tr style='border:1px solid black;'><td>".$movie."</td>";
+                echo "<td style='border:1px solid black;'><ul>";
+                foreach(array_unique($director) as $temp){
+                    echo"<li>".$temp."</li>";
+                }
+                echo"</ul></td><td style='border:1px solid black;'><ul>";
+                foreach(array_unique($actor) as $temp){
+                    echo"<li>".$temp."</li>";
+                }
+                echo'</ul></td></tr>';
+            }
+        }
+        ?>
+
+</table>

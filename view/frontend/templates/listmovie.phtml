@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @var \Magento\Movie\Block\Index $block
+ */
+
+
+
+?>
+<style>
+table {  font-family: arial, sans-serif;   width: 100%;  margin-top: 30px;}
+td, th {  border: 1px solid #dddddd;  text-align: left;  padding: 8px;  }
+td {font-size: 12px;}
+/*tr:nth-child(even) { background-color: #dddddd; }*/
+.movie-id{width:2%} .movie-name{width:20%} .movie-description{width:25%}
+.bg-color{background-color: #5F564E ; color: white}
+
+</style>
+<h2><?php echo $block->getTitle(); ?></h2>
+<table>
+  <tr class="bg-color">
+    <th class="movie-id">Id</th>
+    <th class="movie-name">Name</th>
+    <th class="movie-description">Description</th>
+    <th>Director</th>
+    <th>Actor</th>
+    <th>Rate</th>
+  </tr>
+    <?php
+        foreach ($block->getMovieCollection() as $key=>$movie){
+            echo '
+                  <tr>
+                    <td>'.$movie->getMovieId().'</td>
+                    <td>'.$movie->getName().'</td>
+                    <td>'.$movie->getDescription().'</td>
+                    <td>'.$movie->getDirectorName().'</td>
+                    <td>'.$movie->getActorName().'</td>
+                    <td>'.$movie->getRating().'</td>
+                  </tr>
+            ';
+        }
+    ?>
+</table>
+</body>
+
+</html>
+<hr>
+<?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php endif ?>

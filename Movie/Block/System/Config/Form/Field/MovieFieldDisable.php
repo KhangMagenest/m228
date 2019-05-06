@@ -7,7 +7,8 @@ class Disable extends \Magento\Config\Block\System\Config\Form\Field
 {
     protected function _getElementHtml(AbstractElement $element)
     {
-        $collection = $this->_objectManager->create('Magenest\Movie\Model\ResourceModel\Movie\Collection');
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $collection = $objectManager->create('Magenest\Movie\Model\ResourceModel\Movie\Collection');
         $element->setDisabled('disabled');
         $element->setValue($collection->count());
         return $element->getElementHtml();
